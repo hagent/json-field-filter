@@ -1,0 +1,99 @@
+{
+  "name": "json-field-filter",
+  "displayName": "JSON Field Filter",
+  "description": "Filter JSON fields and view filtered results in a virtual document",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthropics/json-field-filter"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "json-field-filter",
+          "title": "JSON Field Filter",
+          "icon": "$(filter)"
+        }
+      ]
+    },
+    "views": {
+      "json-field-filter": [
+        {
+          "type": "webview",
+          "id": "jsonFieldFilter.sidebar",
+          "name": "Fields"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "jsonFieldFilter.openFilteredView",
+        "title": "Open Filtered JSON View"
+      },
+      {
+        "command": "jsonFieldFilter.refreshFields",
+        "title": "Refresh JSON Fields"
+      }
+    ],
+    "configuration": {
+      "title": "JSON Field Filter",
+      "properties": {
+        "jsonFieldFilter.presets": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Preset name"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Fields to hide when this preset is applied"
+              }
+            },
+            "required": ["name", "fields"]
+          },
+          "description": "Presets for quickly hiding common field sets"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "install-ext": "code --install-extension json-field-filter-0.0.1.vsix",
+    "deploy": "npm run compile && npm run package && npm run install-ext"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.2.2",
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "stream-json": "^1.8.0"
+  }
+}

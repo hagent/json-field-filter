@@ -1,0 +1,7 @@
+out/
+node_modules/
+.vscode-test/
+*.vsix
+test-files/medium.json
+test-files/large.json
+.claude/
