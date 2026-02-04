@@ -134,10 +134,17 @@ function handleEditorChanged(editor: vscode.TextEditor | undefined): void {
 // Hide simple fields from display if there are fewer than 5 of them
 // Exception: always show fields that are already hidden (for presets)
 function filterFieldsForDisplay(fields: FieldInfo[]): FieldInfo[] {
+  const config = vscode.workspace.getConfiguration('jsonFieldFilter');
+  const threshold = config.get<number>('simpleFieldThreshold') ?? 5;
+
+  if (threshold === 0) {
+    return fields;
+  }
+
   const simpleFields = fields.filter(f => !f.isComplex);
   const simpleFieldCount = simpleFields.length;
 
-  if (simpleFieldCount >= 5) {
+  if (simpleFieldCount >= threshold) {
     return fields;
   }
 

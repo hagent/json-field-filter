@@ -50,6 +50,12 @@
     "configuration": {
       "title": "JSON Field Filter",
       "properties": {
+        "jsonFieldFilter.simpleFieldThreshold": {
+          "type": "number",
+          "default": 5,
+          "minimum": 0,
+          "description": "Hide simple (non-object/array) fields from panel if there are fewer than this many. Set to 0 to always show all fields."
+        },
         "jsonFieldFilter.presets": {
           "type": "array",
           "default": [],
