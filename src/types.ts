@@ -2,6 +2,7 @@ export interface FieldInfo {
   name: string;
   hidden: boolean; // true if field should be filtered out
   isComplex: boolean; // true if field contains object or array
+  count: number; // how many times this field appears in the JSON
 }
 
 export interface Preset {

@@ -141,15 +141,8 @@ function filterFieldsForDisplay(fields: FieldInfo[]): FieldInfo[] {
     return fields;
   }
 
-  const simpleFields = fields.filter(f => !f.isComplex);
-  const simpleFieldCount = simpleFields.length;
-
-  if (simpleFieldCount >= threshold) {
-    return fields;
-  }
-
-  // Hide simple fields from panel unless they're already marked as filtered out
-  return fields.filter(f => f.isComplex || f.hidden);
+  // Hide simple fields if their count is below threshold, unless already hidden
+  return fields.filter(f => f.isComplex || f.hidden || f.count >= threshold);
 }
 
 function updateVirtualDocProvider(sourceUri: vscode.Uri, fields: FieldInfo[]): void {
@@ -195,7 +188,7 @@ async function handleExtractFields(): Promise<void> {
 
   try {
     const content = document.getText();
-    const fieldTypes = await extractFieldNamesFromContent(content);
+    const fieldMeta = await extractFieldNamesFromContent(content);
 
     // Get existing state to preserve checkbox values
     const existingFields = fieldStatesMap.get(document.uri.toString());
@@ -207,12 +200,13 @@ async function handleExtractFields(): Promise<void> {
     }
 
     // Create fields, preserving hidden state for existing ones
-    const fields = Array.from(fieldTypes.entries())
+    const fields = Array.from(fieldMeta.entries())
       .sort((a, b) => a[0].toLowerCase().localeCompare(b[0].toLowerCase()))
-      .map(([name, isComplex]) => ({
+      .map(([name, meta]) => ({
         name,
         hidden: existingHidden.get(name) ?? false,
-        isComplex,
+        isComplex: meta.isComplex,
+        count: meta.count,
       }));
 
     currentSourceUri = document.uri;

@@ -3,18 +3,17 @@ import * as vscode from 'vscode';
 import { parser } from 'stream-json';
 import { Readable } from 'stream';
 
-export interface ExtractedField {
-  name: string;
+export interface FieldMeta {
   isComplex: boolean;
+  count: number;
 }
 
 export async function extractFieldNames(
   filePath: string,
   token?: vscode.CancellationToken
-): Promise<Map<string, boolean>> {
+): Promise<Map<string, FieldMeta>> {
   return new Promise((resolve, reject) => {
-    // Map from field name to isComplex (true if any occurrence is object/array)
-    const fieldTypes = new Map<string, boolean>();
+    const fieldMeta = new Map<string, FieldMeta>();
     const fileSize = fs.statSync(filePath).size;
     let bytesRead = 0;
     let pendingKey: string | null = null;
@@ -26,7 +25,7 @@ export async function extractFieldNames(
         cancellable: true,
       },
       async (progressReporter, progressToken) => {
-        return new Promise<Map<string, boolean>>((resolveProgress, rejectProgress) => {
+        return new Promise<Map<string, FieldMeta>>((resolveProgress, rejectProgress) => {
           const stream = fs.createReadStream(filePath, { highWaterMark: 64 * 1024 });
           const jsonParser = parser();
 
@@ -58,9 +57,12 @@ export async function extractFieldNames(
               pendingKey = tok.value;
             } else if (pendingKey !== null) {
               const isComplex = tok.name === 'startObject' || tok.name === 'startArray';
-              // Mark as complex if any occurrence is complex
-              if (isComplex || !fieldTypes.has(pendingKey)) {
-                fieldTypes.set(pendingKey, isComplex || (fieldTypes.get(pendingKey) ?? false));
+              const existing = fieldMeta.get(pendingKey);
+              if (existing) {
+                existing.count++;
+                if (isComplex) existing.isComplex = true;
+              } else {
+                fieldMeta.set(pendingKey, { isComplex, count: 1 });
               }
               pendingKey = null;
             }
@@ -77,7 +79,7 @@ export async function extractFieldNames(
           });
 
           jsonParser.on('end', () => {
-            resolveProgress(fieldTypes);
+            resolveProgress(fieldMeta);
           });
 
           stream.pipe(jsonParser);
@@ -85,14 +87,14 @@ export async function extractFieldNames(
       }
     );
 
-    (progress as Promise<Map<string, boolean>>).then(resolve).catch(reject);
+    (progress as Promise<Map<string, FieldMeta>>).then(resolve).catch(reject);
   });
 }
 
 export async function extractFieldNamesQuick(
   filePath: string,
   token?: vscode.CancellationToken
-): Promise<Map<string, boolean>> {
+): Promise<Map<string, FieldMeta>> {
   const fileSize = fs.statSync(filePath).size;
   const isLargeFile = fileSize > 5 * 1024 * 1024; // 5MB
 
@@ -102,7 +104,7 @@ export async function extractFieldNamesQuick(
 
   // For small files, use simpler approach
   return new Promise((resolve, reject) => {
-    const fieldTypes = new Map<string, boolean>();
+    const fieldMeta = new Map<string, FieldMeta>();
     let pendingKey: string | null = null;
 
     const stream = fs.createReadStream(filePath);
@@ -121,8 +123,12 @@ export async function extractFieldNamesQuick(
         pendingKey = tok.value;
       } else if (pendingKey !== null) {
         const isComplex = tok.name === 'startObject' || tok.name === 'startArray';
-        if (isComplex || !fieldTypes.has(pendingKey)) {
-          fieldTypes.set(pendingKey, isComplex || (fieldTypes.get(pendingKey) ?? false));
+        const existing = fieldMeta.get(pendingKey);
+        if (existing) {
+          existing.count++;
+          if (isComplex) existing.isComplex = true;
+        } else {
+          fieldMeta.set(pendingKey, { isComplex, count: 1 });
         }
         pendingKey = null;
       }
@@ -130,7 +136,7 @@ export async function extractFieldNamesQuick(
 
     stream.on('error', reject);
     jsonParser.on('error', reject);
-    jsonParser.on('end', () => resolve(fieldTypes));
+    jsonParser.on('end', () => resolve(fieldMeta));
 
     stream.pipe(jsonParser);
   });
@@ -139,9 +145,9 @@ export async function extractFieldNamesQuick(
 export async function extractFieldNamesFromContent(
   content: string,
   token?: vscode.CancellationToken
-): Promise<Map<string, boolean>> {
+): Promise<Map<string, FieldMeta>> {
   return new Promise((resolve, reject) => {
-    const fieldTypes = new Map<string, boolean>();
+    const fieldMeta = new Map<string, FieldMeta>();
     let pendingKey: string | null = null;
 
     const stream = Readable.from([content]);
@@ -160,8 +166,12 @@ export async function extractFieldNamesFromContent(
         pendingKey = tok.value;
       } else if (pendingKey !== null) {
         const isComplex = tok.name === 'startObject' || tok.name === 'startArray';
-        if (isComplex || !fieldTypes.has(pendingKey)) {
-          fieldTypes.set(pendingKey, isComplex || (fieldTypes.get(pendingKey) ?? false));
+        const existing = fieldMeta.get(pendingKey);
+        if (existing) {
+          existing.count++;
+          if (isComplex) existing.isComplex = true;
+        } else {
+          fieldMeta.set(pendingKey, { isComplex, count: 1 });
         }
         pendingKey = null;
       }
@@ -169,7 +179,7 @@ export async function extractFieldNamesFromContent(
 
     stream.on('error', reject);
     jsonParser.on('error', reject);
-    jsonParser.on('end', () => resolve(fieldTypes));
+    jsonParser.on('end', () => resolve(fieldMeta));
 
     stream.pipe(jsonParser);
   });
