@@ -71,6 +71,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   public setSourceUri(uri: string | null): void {
     this._sourceUri = uri;
+    if (this._view) {
+      this._view.title = uri ? `Filter: ${uri}` : 'JSON Filter';
+    }
     this._postMessage({ type: 'setSourceUri', uri });
   }
 
@@ -103,7 +106,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     html, body { height: 100%; }
     body { padding: 10px; font-family: var(--vscode-font-family); font-size: var(--vscode-font-size); color: var(--vscode-foreground); }
     #app { display: flex; flex-direction: column; height: 100%; }
-    #source-file { font-size: 11px; color: var(--vscode-descriptionForeground); margin-bottom: 10px; }
     #controls { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
     #search { width: 100%; padding: 6px 8px; border: 1px solid var(--vscode-input-border); background: var(--vscode-input-background); color: var(--vscode-input-foreground); border-radius: 2px; }
     .btn { padding: 6px 12px; border: none; border-radius: 2px; cursor: pointer; font-size: 12px; }
@@ -134,7 +136,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 </head>
 <body>
   <div id="app">
-    <div id="source-file">Open a JSON file</div>
     <div id="controls">
       <button id="extract-btn" class="btn btn-primary">Extract Fields</button>
       <select id="preset-select" class="hidden">
@@ -175,7 +176,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       const fieldsContainer = document.getElementById('fields-container');
       const statusEl = document.getElementById('status');
       const errorEl = document.getElementById('error');
-      const sourceFileEl = document.getElementById('source-file');
       const selectAllCheckbox = document.getElementById('select-all');
       const fieldCountEl = document.getElementById('field-count');
       const openBtn = document.getElementById('open-btn');
@@ -342,9 +342,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             } else {
               hide(errorEl);
             }
-            break;
-          case 'setSourceUri':
-            sourceFileEl.textContent = message.uri ? 'Filter: ' + message.uri : 'Open a JSON file';
             break;
           case 'setPresets':
             presets = message.presets || [];
