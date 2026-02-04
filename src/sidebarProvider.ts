@@ -72,7 +72,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   public setSourceUri(uri: string | null): void {
     this._sourceUri = uri;
     if (this._view) {
-      this._view.title = uri || 'Fields';
+      this._view.title = uri || '';
     }
     this._postMessage({ type: 'setSourceUri', uri });
   }
