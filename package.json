@@ -40,7 +40,7 @@
     "commands": [
       {
         "command": "jsonFieldFilter.openFilteredView",
-        "title": "Open Filtered JSON View"
+        "title": "Open Filtered JSON File"
       },
       {
         "command": "jsonFieldFilter.refreshFields",

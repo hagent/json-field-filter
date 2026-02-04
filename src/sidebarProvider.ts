@@ -147,7 +147,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         <span class="toggle-switch"></span>
         <span>Hidden only</span>
       </label>
-      <button id="open-btn" class="btn btn-secondary hidden">Open Filtered View</button>
+      <button id="open-btn" class="btn btn-secondary hidden">Open Filtered File</button>
     </div>
     <div id="status" class="hidden">Extracting...</div>
     <div id="error" class="hidden"></div>
