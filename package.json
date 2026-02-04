@@ -33,7 +33,7 @@
         {
           "type": "webview",
           "id": "jsonFieldFilter.sidebar",
-          "name": "Fields"
+          "name": ""
         }
       ]
     },
