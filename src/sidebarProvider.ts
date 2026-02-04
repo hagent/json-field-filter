@@ -134,7 +134,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 </head>
 <body>
   <div id="app">
-    <div id="source-file">No file open</div>
+    <div id="source-file">Open a JSON file</div>
     <div id="controls">
       <button id="extract-btn" class="btn btn-primary">Extract Fields</button>
       <select id="preset-select" class="hidden">
@@ -344,7 +344,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             }
             break;
           case 'setSourceUri':
-            sourceFileEl.textContent = message.uri || 'No file open';
+            sourceFileEl.textContent = message.uri ? 'Filter: ' + message.uri : 'Open a JSON file';
             break;
           case 'setPresets':
             presets = message.presets || [];
