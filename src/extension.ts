@@ -186,6 +186,9 @@ async function handleExtractFields(): Promise<void> {
   sidebarProvider.setLoading(true);
   sidebarProvider.setError(null);
 
+  // Reload presets from settings
+  sidebarProvider.setPresets(getPresets());
+
   try {
     const content = document.getText();
     const fieldMeta = await extractFieldNamesFromContent(content);
