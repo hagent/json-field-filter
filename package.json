@@ -35,7 +35,8 @@
         {
           "type": "webview",
           "id": "jsonFieldFilter.sidebar",
-          "name": ""
+          "name": "",
+          "icon": "$(filter)"
         }
       ]
     },
@@ -91,13 +92,12 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts",
-    "package": "npm run compile && vsce package",
+    "package": "npm run compile && npx @vscode/vsce package",
     "install-ext": "code --install-extension json-field-filter-$npm_package_version.vsix --force",
     "deploy": "npm run package && npm run install-ext",
-    "publish": "vsce publish"
+    "publish": "npx @vscode/vsce publish"
   },
   "devDependencies": {
-    "@vscode/vsce": "^3.2.2",
     "@types/node": "^20.10.0",
     "@types/vscode": "^1.85.0",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
