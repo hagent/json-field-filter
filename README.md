@@ -13,21 +13,7 @@ VS Code extension for filtering and previewing specific fields from large JSON f
 
 ## Installation
 
-Since this extension is not published to the marketplace, install it locally:
-
-```bash
-# Clone the repo
-git clone https://github.com/hagent/json-field-filter.git
-cd json-field-filter
-
-# Install dependencies
-npm install
-
-# Build and install
-npm run deploy
-```
-
-After installation, reload VS Code window.
+Search for "JSON Field Filter" in the VS Code Extensions view, or install from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=hagent.json-field-filter).
 
 ## Usage
 
@@ -35,7 +21,7 @@ After installation, reload VS Code window.
 2. Click the filter icon in the activity bar (left sidebar)
 3. Click "Extract Fields" to scan the document
 4. Check fields you want to hide
-5. Click "Open Filtered View" to see the result
+5. Click "Open Filtered File" to see the result
 
 ## Configuration
 
@@ -52,11 +38,12 @@ Add presets in your VS Code `settings.json`:
 
 ## Development
 
-See [DEVELOPMENT.md](DEVELOPMENT.md) for architecture and code details.
+See [CLAUDE.md](CLAUDE.md) for architecture and code details.
 
 ```bash
 npm run compile    # Build
 npm run watch      # Watch mode
 npm run lint       # Lint
-npm run deploy     # Build + package + install
+npm run deploy     # Build + package + install locally
+npm run publish    # Publish to marketplace
 ```
