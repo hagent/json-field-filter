@@ -4,7 +4,7 @@ VS Code extension for filtering and previewing specific fields from large JSON f
 
 ## Demo
 
-https://github.com/hagent/json-field-filter/raw/master/media/demo.mp4
+![Demo](media/demo.gif)
 
 ## Features
 
@@ -14,7 +14,11 @@ https://github.com/hagent/json-field-filter/raw/master/media/demo.mp4
 
 ## Installation
 
-Search for "JSON Field Filter" in the VS Code Extensions view, or install from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=hagent.json-field-filter).
+Search for "JSON Field Filter" in the VS Code Extensions view, install from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=hagent.json-field-filter), or via CLI:
+
+```bash
+code --install-extension hagent.json-field-filter
+```
 
 ## Usage
 
@@ -26,10 +30,10 @@ Search for "JSON Field Filter" in the VS Code Extensions view, or install from t
 
 ## Configuration
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `jsonFieldFilter.presets` | `[]` | Presets for quickly hiding common field sets |
-| `jsonFieldFilter.fieldCountThreshold` | `5` | Hide simple (non-object/array) fields from panel if there are fewer than this many. Set to 0 to always show all fields. |
+| Setting                               | Default | Description                                                                                                             |
+| ------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `jsonFieldFilter.presets`             | `[]`    | Presets for quickly hiding common field sets                                                                            |
+| `jsonFieldFilter.fieldCountThreshold` | `5`     | Hide simple (non-object/array) fields from panel if there are fewer than this many. Set to 0 to always show all fields. |
 
 ### Presets
 
@@ -58,16 +62,4 @@ Set to `0` to always show all fields:
 
 ```json
 "jsonFieldFilter.fieldCountThreshold": 0
-```
-
-## Development
-
-See [CLAUDE.md](CLAUDE.md) for architecture and code details.
-
-```bash
-npm run compile    # Build
-npm run watch      # Watch mode
-npm run lint       # Lint
-npm run package     # Build + package
-npm run publish    # Publish to marketplace
 ```
