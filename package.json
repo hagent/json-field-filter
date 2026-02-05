@@ -2,7 +2,7 @@
   "name": "json-field-filter",
   "displayName": "JSON Field Filter",
   "description": "Filter JSON fields and view filtered results in a virtual document",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "hagent",
   "icon": "media/icon.png",
   "license": "MIT",
@@ -76,7 +76,10 @@
                 "description": "Fields to hide when this preset is applied"
               }
             },
-            "required": ["name", "fields"]
+            "required": [
+              "name",
+              "fields"
+            ]
           },
           "description": "Presets for quickly hiding common field sets"
         }
