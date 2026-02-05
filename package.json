@@ -3,6 +3,8 @@
   "displayName": "JSON Field Filter",
   "description": "Filter JSON fields and view filtered results in a virtual document",
   "version": "0.0.1",
+  "publisher": "hagent",
+  "icon": "media/icon.png",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -88,7 +90,8 @@
     "lint": "eslint src --ext ts",
     "package": "vsce package",
     "install-ext": "code --install-extension json-field-filter-0.0.1.vsix",
-    "deploy": "npm run compile && npm run package && npm run install-ext"
+    "deploy": "npm run compile && npm run package && npm run install-ext",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@vscode/vsce": "^3.2.2",
