@@ -37,7 +37,13 @@ export class FilteredJsonProvider implements vscode.TextDocumentContentProvider 
     token: vscode.CancellationToken
   ): Promise<string> {
     if (!this.sourceUri) {
-      return '// No JSON file selected';
+      const decoded = getSourceUriFromFilteredUri(uri);
+      if (decoded) {
+        this.sourceUri = decoded;
+        this.sourceFilePath = decoded.scheme === 'untitled' ? null : decoded.fsPath;
+      } else {
+        return '// No JSON file selected';
+      }
     }
 
     try {
