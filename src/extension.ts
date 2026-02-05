@@ -135,7 +135,7 @@ function handleEditorChanged(editor: vscode.TextEditor | undefined): void {
 // Exception: always show fields that are already hidden (for presets)
 function filterFieldsForDisplay(fields: FieldInfo[]): FieldInfo[] {
   const config = vscode.workspace.getConfiguration('jsonFieldFilter');
-  const threshold = config.get<number>('simpleFieldThreshold') ?? 5;
+  const threshold = config.get<number>('fieldCountThreshold') ?? 5;
 
   if (threshold === 0) {
     return fields;

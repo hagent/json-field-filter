@@ -45,14 +45,14 @@
         "title": "Open Filtered JSON File"
       },
       {
-        "command": "jsonFieldFilter.refreshFields",
-        "title": "Refresh JSON Fields"
+        "command": "jsonFieldFilter.extractFields",
+        "title": "Extract JSON Fields"
       }
     ],
     "configuration": {
       "title": "JSON Field Filter",
       "properties": {
-        "jsonFieldFilter.simpleFieldThreshold": {
+        "jsonFieldFilter.fieldCountThreshold": {
           "type": "number",
           "default": 5,
           "minimum": 0,
