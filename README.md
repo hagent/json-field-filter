@@ -2,6 +2,10 @@
 
 VS Code extension for filtering and previewing specific fields from large JSON files.
 
+## Demo
+
+https://github.com/hagent/json-field-filter/raw/master/media/demo.mp4
+
 ## Features
 
 - Hide/show JSON fields via sidebar checkboxes
