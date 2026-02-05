@@ -8,8 +8,7 @@ VS Code extension for filtering and previewing specific fields from large JSON f
 npm run compile    # Build TypeScript to ./out/
 npm run watch      # Watch mode for development
 npm run lint       # ESLint check
-npm run package    # Create .vsix package
-npm run install-ext # Install .vsix to VS Code
+npm run package    # compile and create .vsix package
 npm run deploy     # compile + package + install (all-in-one)
 ```
 
