@@ -4,12 +4,9 @@ VS Code extension for filtering and previewing specific fields from large JSON f
 
 ## Features
 
-- Extract all field names from JSON files
-- Toggle visibility of fields with checkboxes
-- Live filtered preview in side-by-side view
-- Streaming parser for large files (5MB+)
+- Hide/show JSON fields via sidebar checkboxes
+- Side-by-side live filtered preview
 - Presets for quickly hiding common field sets
-- "Hidden only" filter to see what's being filtered
 
 ## Installation
 
@@ -25,15 +22,38 @@ Search for "JSON Field Filter" in the VS Code Extensions view, or install from t
 
 ## Configuration
 
-Add presets in your VS Code `settings.json`:
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `jsonFieldFilter.presets` | `[]` | Presets for quickly hiding common field sets |
+| `jsonFieldFilter.fieldCountThreshold` | `5` | Hide simple (non-object/array) fields from panel if there are fewer than this many. Set to 0 to always show all fields. |
+
+### Presets
+
+Presets let you quickly hide a predefined set of fields. When you apply a preset from the sidebar dropdown, every field whose name appears in the preset's `fields` list gets marked as hidden. Fields not in the list remain unchanged, so you can layer a preset on top of manual selections.
+
+Example in `settings.json`:
 
 ```json
 "jsonFieldFilter.presets": [
   {
-    "name": "My Preset",
-    "fields": ["field1", "field2", "field3"]
+    "name": "Hide Metadata",
+    "fields": ["_id", "_rev", "_timestamp", "_etag"]
+  },
+  {
+    "name": "Essentials Only",
+    "fields": ["debug", "trace", "internal", "raw"]
   }
 ]
+```
+
+### Field Count Threshold
+
+By default, simple fields (non-object/array) that appear fewer than 5 times across the JSON are hidden from the sidebar panel to reduce clutter. Fields that are already marked hidden (e.g. via a preset) are always shown regardless of count.
+
+Set to `0` to always show all fields:
+
+```json
+"jsonFieldFilter.fieldCountThreshold": 0
 ```
 
 ## Development
