@@ -64,6 +64,6 @@ See [CLAUDE.md](CLAUDE.md) for architecture and code details.
 npm run compile    # Build
 npm run watch      # Watch mode
 npm run lint       # Lint
-npm run deploy     # Build + package + install locally
+npm run package     # Build + package
 npm run publish    # Publish to marketplace
 ```
