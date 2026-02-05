@@ -2,7 +2,7 @@
   "name": "json-field-filter",
   "displayName": "JSON Field Filter",
   "description": "Filter JSON fields and view filtered results in a virtual document",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "hagent",
   "icon": "media/icon.png",
   "license": "MIT",
