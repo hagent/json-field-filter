@@ -1,0 +1,132 @@
+{
+    "id": "order-2847",
+    "status": "completed",
+    "metadata": {
+        "createdAt": "2025-11-14T09:23:17Z",
+        "updatedAt": "2025-11-15T14:02:44Z",
+        "source": "web",
+        "region": "eu-west-1",
+        "version": "3.2.1",
+        "correlationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "retryCount": 0,
+        "priority": "normal",
+        "tags": ["bulk", "discounted", "loyalty"],
+        "processedBy": "worker-17"
+    },
+    "items": [
+        {
+            "sku": "WIDGET-001",
+            "name": "Titanium Widget",
+            "qty": 2,
+            "price": 29.99
+        },
+        {
+            "sku": "WIDGET-002",
+            "name": "Carbon Widget",
+            "qty": 1,
+            "price": 49.99
+        },
+        {
+            "sku": "GADGET-010",
+            "name": "Micro Gadget",
+            "qty": 5,
+            "price": 12.5
+        },
+        {
+            "sku": "GADGET-011",
+            "name": "Nano Gadget",
+            "qty": 3,
+            "price": 15.75
+        },
+        { "sku": "PART-100", "name": "Hex Bolt M6", "qty": 100, "price": 0.35 },
+        { "sku": "PART-101", "name": "Hex Nut M6", "qty": 100, "price": 0.2 },
+        {
+            "sku": "PART-102",
+            "name": "Spring Washer M6",
+            "qty": 100,
+            "price": 0.15
+        },
+        { "sku": "PART-200", "name": "Bearing 608ZZ", "qty": 12, "price": 3.4 },
+        { "sku": "PART-201", "name": "Bearing 6001", "qty": 8, "price": 5.6 },
+        {
+            "sku": "TOOL-050",
+            "name": "Precision Screwdriver Set",
+            "qty": 1,
+            "price": 34.99
+        },
+        {
+            "sku": "TOOL-051",
+            "name": "Torque Wrench 1/4",
+            "qty": 1,
+            "price": 89.99
+        },
+        {
+            "sku": "TOOL-052",
+            "name": "Digital Caliper",
+            "qty": 1,
+            "price": 27.5
+        },
+        {
+            "sku": "MATERIAL-300",
+            "name": "Aluminum Sheet 2mm",
+            "qty": 4,
+            "price": 18.9
+        },
+        {
+            "sku": "MATERIAL-301",
+            "name": "Steel Rod 8mm",
+            "qty": 6,
+            "price": 7.25
+        },
+        {
+            "sku": "MATERIAL-302",
+            "name": "Copper Wire 1.5mm",
+            "qty": 10,
+            "price": 4.8
+        },
+        {
+            "sku": "MATERIAL-303",
+            "name": "Brass Tube 6mm",
+            "qty": 3,
+            "price": 11.3
+        },
+        {
+            "sku": "SUPPLY-400",
+            "name": "Thread Locker Blue",
+            "qty": 2,
+            "price": 8.99
+        },
+        {
+            "sku": "SUPPLY-401",
+            "name": "Contact Cleaner",
+            "qty": 1,
+            "price": 12.49
+        },
+        {
+            "sku": "SUPPLY-402",
+            "name": "Thermal Paste",
+            "qty": 3,
+            "price": 6.99
+        },
+        {
+            "sku": "SUPPLY-403",
+            "name": "Shrink Tubing Kit",
+            "qty": 1,
+            "price": 14.99
+        }
+    ],
+    "shipping": {
+        "method": "express",
+        "carrier": "DHL",
+        "trackingNumber": "JD014600012345678901",
+        "estimatedDelivery": "2025-11-17"
+    },
+    "billing": {
+        "subtotal": 892.47,
+        "tax": 169.57,
+        "discount": -44.62,
+        "total": 1017.42,
+        "currency": "EUR"
+    },
+    "notes": "Deliver to loading dock B. Call +49 30 1234567 on arrival."
+}
