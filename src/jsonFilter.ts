@@ -154,7 +154,11 @@ async function filterStream(
 
         case 'endObject':
           currentDepth--;
-          output(`\n${getIndent()}}`);
+          if (needsComma) {
+            output(`\n${getIndent()}}`);
+          } else {
+            output('}');
+          }
           needsComma = true;
           break;
 
@@ -173,7 +177,11 @@ async function filterStream(
 
         case 'endArray':
           currentDepth--;
-          output(`\n${getIndent()}]`);
+          if (needsComma) {
+            output(`\n${getIndent()}]`);
+          } else {
+            output(']');
+          }
           needsComma = true;
           break;
 
